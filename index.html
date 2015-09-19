@@ -1,9 +1,45 @@
+<!DOCTYPE html>
 <html>
+
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
+<script src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
+<script src="getFlickrAPI.js"></script>
+
+
 </head>
 
 <body>
-hello world.
+
+
+<script>
+
+/*
+var url = location.href;
+console.log(url);
+var filename = url.match(".+/(.+?)([\?#;].*)?$")[1];
+console.log(filename);
+url = url.replace(filename, "oauth_callback.html")
+console.log(url);
+
+//location.href = url;
+window.open(url);
+*/
+
+getRequestToken('http://yokkyun.github.io/login.html');
+//getRequestToken("oob");
+//getFlickrAPI('https://www.flickr.com/services/api/flickr.auth.getFrob', 'callback_request_token');
+//authorizeFlickr('https://www.flickr.com/services/oauth/authorize', 'callback_request_token');
+
+function callback_request_token(json){
+    console.log("callback");
+}
+
+</script>
+
+
 </body>
+
 
 </html>
