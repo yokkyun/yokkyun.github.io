@@ -59,7 +59,7 @@ function getRequestToken( callBackFunc ){
         oauth_callback: callBackFunc,
         oauth_version: "1.0"
     };
-    var api_url = "https://www.flickr.com/services/oauth/request_token";
+    var api_url = "http://www.flickr.com/services/oauth/request_token";
 
     var message = {
         method: "GET",
@@ -105,7 +105,7 @@ function getAccessToken( request_token ){
     var parameters = {
         oauth_token: request_token
     };
-    var api_url = "https://www.flickr.com/services/oauth/authorize";
+    var api_url = "http://www.flickr.com/services/oauth/authorize";
 
     var message = {
         method: "GET",
