@@ -10,7 +10,68 @@
 <body>
 
 <script>
-  console.log(document.location.search);
+  if (1 < document.location.search.length) {
+    // 最初の1文字 (?記号) を除いた文字列を取得する
+     var query = document.location.search.substring(1);
+
+    // クエリの区切り記号 (&) で文字列を配列に分割する
+     var parameters = query.split('&');
+
+    var result = new Object();
+    for (var i = 0; i < parameters.length; i++) {
+      // パラメータ名とパラメータ値に分割する
+       var element = parameters[i].split('=');
+
+      var paramName = decodeURIComponent(element[0]);
+      var paramValue = decodeURIComponent(element[1]);
+
+      // パラメータ名をキーとして連想配列に追加する
+       result[paramName] = decodeURIComponent(paramValue);
+
+      console.log(result);
+
+      getAccessToken(result["oauth_token"], result["oauth_verifier"]);
+
+    }
+
+function getAccessToken( token, verifier ){
+
+    console.log("getAccessToken");
+
+    var parameters = {
+        oauth_verifier: verifier,
+        oauth_signature_method: "HMAC-SHA1",
+        oauth_consumer_key: "9780338bcffe68b5cb661fc0bf69ba03",
+        oauth_version: "1.0"
+    };
+    var api_url = "https://www.flickr.com/services/oauth/access_token";
+
+    var message = {
+        method: "GET",
+        action: api_url,
+        parameters: parameters
+    };
+    var secretKeys = {
+        "consumerSecret" : "09ddff6be28cddb1",
+        "tokenSecret" : ""
+    };
+
+    OAuth.setTimestampAndNonce(message);
+    OAuth.SignatureMethod.sign(message, secretKeys);
+
+    var signed_url = OAuth.addToURL(api_url, parameters);
+
+   var options = {
+      type: message.method,
+      url: signed_url,
+      success: function(d, dt) {
+                                 console.log(d);
+        },
+    };
+    $.ajax(options); // 送信
+}
+
+
 </script>
 
 </body>
