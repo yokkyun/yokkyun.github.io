@@ -62,12 +62,20 @@ function getAccessToken( token, verifier ){
     OAuth.SignatureMethod.sign(message, secretKeys);
 
     var signed_url = OAuth.addToURL(api_url, parameters);
+    
+    console.log(signed_url);
 
    var options = {
       type: message.method,
       url: signed_url,
       success: function(d, dt) {
                                  console.log(d);
+        },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+          console.log("error:");
+          console.log(XMLHttpRequest);
+          console.log(testStatus);
+          console.log(errorThrown);
         },
     };
     $.ajax(options); // 送信
