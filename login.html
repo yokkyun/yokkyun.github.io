@@ -44,7 +44,8 @@ function getAccessToken( token, verifier ){
         oauth_verifier: verifier,
         oauth_signature_method: "HMAC-SHA1",
         oauth_consumer_key: "9780338bcffe68b5cb661fc0bf69ba03",
-        oauth_version: "1.0"
+        oauth_version: "1.0",
+        oauth_token: token
     };
     var api_url = "https://www.flickr.com/services/oauth/access_token";
 
